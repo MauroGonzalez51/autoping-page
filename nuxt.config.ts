@@ -4,7 +4,15 @@ export default defineNuxtConfig({
     modules: [
         "@nuxt/eslint",
         ["@nuxtjs/color-mode", { classSuffix: "" }],
-        "@nuxtjs/tailwindcss",
+        ["@nuxtjs/tailwindcss", { editorSupport: true }],
         "@vueuse/motion/nuxt",
+        ["@nuxtjs/supabase", { redirect: false }],
+        [
+            "shadcn-nuxt",
+            {
+                prefix: "",
+                componentDir: "./components/ui",
+            },
+        ],
     ],
 });
