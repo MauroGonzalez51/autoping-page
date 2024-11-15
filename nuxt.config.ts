@@ -14,5 +14,6 @@ export default defineNuxtConfig({
                 componentDir: "./components/ui",
             },
         ],
+        "@nuxt/image",
     ],
 });
