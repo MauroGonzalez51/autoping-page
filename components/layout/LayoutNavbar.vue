@@ -1,14 +1,87 @@
+<script setup lang="ts">
+    interface NavbarLink {
+        to: string;
+        label: string;
+    }
+
+    // TODO: Update this when needed.
+    const navbarLinks: NavbarLink[] = [
+        {
+            to: "/",
+            label: "Inicio",
+        },
+        {
+            to: "/",
+            label: "Servicios",
+        },
+        {
+            to: "/",
+            label: "¿Quienes Somos?",
+        },
+        {
+            to: "/",
+            label: "Contactanos",
+        },
+    ];
+
+    const isMobile = useMediaQuery("(max-width: 768px)");
+</script>
+
 <template>
     <div class="w-full border-b-2 border-gray-950 dark:border-gray-400">
-        <div class="container px-12 py-6 flex items-center">
+        <div class="container py-6 flex items-center">
             <div class="w-full flex justify-between items-center">
-                <div class="w-24">
+                <div>
                     <NuxtLink to="/">
-                        <NuxtImg src="/logo.png" class="w-full" />
+                        <NuxtImg src="/logo.png" class="w-full size-20" />
                     </NuxtLink>
                 </div>
 
-                <div>Other content</div>
+                <template v-if="isMobile">
+                    <Motion
+                        :initial="{ opacity: 0, y: -20 }"
+                        :enter="{ opacity: 1, y: 0 }"
+                    >
+                        <DropdownMenu>
+                            <DropdownMenuTrigger as-child>
+                                <Button variant="ghost" class="py-6">
+                                    <Icon
+                                        name="material-symbols:menu-rounded"
+                                        class="size-14"
+                                    />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuItem
+                                    v-for="{ label, to } in navbarLinks"
+                                    :key="label"
+                                >
+                                    <NuxtLink class="w-full h-full" :to="to">
+                                        {{ label }}
+                                    </NuxtLink>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </Motion>
+                </template>
+
+                <template v-else>
+                    <Motion
+                        :initial="{ opacity: 0, y: -20 }"
+                        :enter="{ opacity: 1, y: 0 }"
+                    >
+                        <div class="flex gap-6">
+                            <NuxtLink
+                                v-for="{ label, to } in navbarLinks"
+                                :key="label"
+                                :to="to"
+                                class="text-xl font-bold text-[#012044] hover:underline"
+                            >
+                                {{ label }}
+                            </NuxtLink>
+                        </div>
+                    </Motion>
+                </template>
             </div>
         </div>
     </div>
