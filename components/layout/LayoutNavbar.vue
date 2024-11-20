@@ -28,7 +28,7 @@
 </script>
 
 <template>
-    <div class="w-full border-b-2 border-gray-950 dark:border-gray-400">
+    <div class="w-full">
         <div class="container py-6 flex items-center">
             <div class="w-full flex justify-between items-center">
                 <div>
@@ -56,7 +56,10 @@
                                     v-for="{ label, to } in navbarLinks"
                                     :key="label"
                                 >
-                                    <NuxtLink class="w-full h-full" :to="to">
+                                    <NuxtLink
+                                        class="w-full h-full px-2"
+                                        :to="to"
+                                    >
                                         {{ label }}
                                     </NuxtLink>
                                 </DropdownMenuItem>
