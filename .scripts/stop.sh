@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# Set base directories as environment variables
+# Set the base directories as environment variables
 export SUPABASE_DIR="$HOME/Downloads/apps/supabase/docker"
 export WORK_DIR="$HOME/dev/web/autoping-page"
 
-# Stop local PostgreSQL service
-sudo systemctl stop postgresql.service
-
-# Navigate and start Supabase
+# Stop supabase instance
 cd "$SUPABASE_DIR"
-docker compose up -d
+docker compose down
+
+# Init local PostgreSQL service
+sudo systemctl start postgresql.service
 
 # Return to directory
 cd "$WORK_DIR"
