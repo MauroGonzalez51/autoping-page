@@ -1,25 +1,27 @@
 <script setup lang="ts">
+    import type { RoutesNamesList } from "@typed-router";
+
     interface NavbarLink {
-        to: string;
+        to: RoutesNamesList;
         label: string;
     }
 
     // TODO: Update this when needed.
     const navbarLinks: NavbarLink[] = [
         {
-            to: "/",
+            to: "index",
             label: "Inicio",
         },
         {
-            to: "/",
+            to: "index",
             label: "Servicios",
         },
         {
-            to: "/",
+            to: "index",
             label: "¿Quienes Somos?",
         },
         {
-            to: "/",
+            to: "index",
             label: "Contactanos",
         },
     ];
@@ -41,6 +43,7 @@
                     <Motion
                         :initial="{ opacity: 0, y: -20 }"
                         :enter="{ opacity: 1, y: 0 }"
+                        class="inline-flex items-center"
                     >
                         <DropdownMenu>
                             <DropdownMenuTrigger as-child>
@@ -58,7 +61,7 @@
                                 >
                                     <NuxtLink
                                         class="w-full h-full px-2"
-                                        :to="to"
+                                        :to="{ name: to }"
                                     >
                                         {{ label }}
                                     </NuxtLink>
@@ -69,21 +72,16 @@
                 </template>
 
                 <template v-else>
-                    <Motion
-                        :initial="{ opacity: 0, y: -20 }"
-                        :enter="{ opacity: 1, y: 0 }"
-                    >
-                        <div class="flex gap-6">
-                            <NuxtLink
-                                v-for="{ label, to } in navbarLinks"
-                                :key="label"
-                                :to="to"
-                                class="text-xl font-bold text-[#012044] hover:underline"
-                            >
-                                {{ label }}
-                            </NuxtLink>
-                        </div>
-                    </Motion>
+                    <div class="flex gap-6">
+                        <NuxtLink
+                            v-for="{ label, to } in navbarLinks"
+                            :key="label"
+                            :to="{ name: to }"
+                            class="text-xl font-bold text-[#012044] hover:underline"
+                        >
+                            {{ label }}
+                        </NuxtLink>
+                    </div>
                 </template>
             </div>
         </div>
