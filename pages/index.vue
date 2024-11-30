@@ -1,9 +1,9 @@
 <script setup lang="ts">
     import { capitalize } from "vue";
 
-    interface ColorModeOption {
-        label: string;
-        action: () => unknown;
+    interface ColorModeOption<T extends string> {
+        label: T;
+        action: ({ value }: { value: T }) => unknown;
     }
 
     useHead({
@@ -12,14 +12,14 @@
 
     const colorMode = useColorMode();
 
-    const colorModeOptions: ColorModeOption[] = [
+    const colorModeOptions: ColorModeOption<"light" | "dark">[] = [
         {
             label: "light",
-            action: () => (colorMode.preference = "light"),
+            action: ({ value }) => (colorMode.preference = value),
         },
         {
             label: "dark",
-            action: () => (colorMode.preference = "dark"),
+            action: ({ value }) => (colorMode.preference = value),
         },
     ];
 </script>
@@ -36,9 +36,7 @@
                 class="absolute w-full h-full top-0 left-0 flex flex-col items-center justify-center text-slate-50 gap-2"
             >
                 <div class="font-bold text-2xl">Autoping Serviteca</div>
-                <div
-                    class="font-extrabold text-6xl text-center break-words"
-                >
+                <div class="font-extrabold text-6xl text-center break-words">
                     Servicio Automotriz
                 </div>
                 <div>
